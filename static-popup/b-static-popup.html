@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+    $(function() {
+        function addModTrigger(modName) {
+            var dirMods = [];
+            $('.b-controls__' + modName)
+                .find('option')
+                .each(function() {
+                    dirMods.push('b-static-popup_' + modName + '_' + this.value);
+                })
+                .end()
+                .on('change', function() {
+                    $('.b-static-popup')
+                        .removeClass(dirMods.join(' '))
+                        .addClass('b-static-popup_' + modName + '_' + this.value);
+                })
+                .triggerHandler('change');
+        }
+
+        addModTrigger('dir');
+        addModTrigger('size');
+        $('.b-controls__html').on('input', function() {
+            $('.b-static-popup__popup').html(
+                $('<div/>').html( $('.b-controls__html').val() )
+                    .html());
+        }).triggerHandler('input');
+
+        $('.b-container__toggle input').on('change', function() {
+            $(this).closest('.b-static-popup')
+                .toggleClass('b-static-popup_show', $(this).prop('checked'));
+        });
+
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="b-static-popup.css" />
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        .b-heading {
+            font: normal 25px sans-serif;
+            margin: 0 20px;
+        }
+
+        .b-controls {
+            font-size: 14px;
+
+            margin: 20px;
+        }
+
+        .b-controls__html {
+            width: 100%;
+            height: 50px;
+            margin: 5px 0;
+        }
+
+        .b-examples {
+            width: 570px;
+            margin: 0 auto;
+        }
+
+        .b-examples:after {
+            content: " ";
+            display: block;
+            height: 0;
+            visibility: hidden;
+
+            clear: both;
+        }
+
+        .b-container {
+            position: relative;
+
+            width: 250px;
+            height: 100px;
+            padding: 10px;
+            margin: 0 10px 0 0;
+
+            float: left;
+
+            background-color: #eee;
+        }
+
+        .b-container__toggle {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+        }
+
+        .b-anchor {
+            display: inline-block; /* no margin collapse! */
+            padding: 0 5px;
+            margin: 20px;
+
+            background-color: #fcefa1;
+        }
+    </style>
+</head>
+<body>
+<div class="b-heading">.b-static-popup</div>
+<div class="b-controls">
+    Set <strong>dir</strong> modifier: <select class="b-controls__dir">
+        <option value="right">right</option>
+        <option value="left">left</option>
+        <option value="top">top</option>
+        <option value="bottom">bottom</option>
+    </select> or <strong>size</strong> modifier: <select class="b-controls__size">
+    <option value="small">small</option>
+    <option value="normal">normal</option>
+    <option value="large">large</option>
+</select><br/>
+Modify inner HTML for popups (applied live):<br/>
+<textarea class="b-controls__html">
+&lt;strong&gt;BEM&lt;/strong&gt; gives useful patterns and methodological recommendations
+on writing CSS, &lt;strong&gt;JavaScript&lt;/strong&gt;, templates (and other web-related
+technologies) in an extra-semantic way.
+</textarea>
+</div>
+<div class="b-examples">
+    <div class="b-container b-static-popup b-static-popup_dir_right">
+        hover me!
+        <div class="b-static-popup__popup"></div>
+        <div class="b-container__toggle">
+            <label><input type="checkbox" />&nbsp;Freeze hovered state</label>
+        </div>
+    </div>
+        
+    <div class="b-container b-static-popup b-static-popup_dir_right">
+        <div class="b-anchor b-static-popup__anchor">
+            anchor
+            <div class="b-static-popup__popup"></div>
+        </div>
+        <div class="b-container__toggle">
+            <label><input type="checkbox" />&nbsp;Freeze hovered state</label>
+        </div>
+    </div>
+</div>
+</body>
+</html>

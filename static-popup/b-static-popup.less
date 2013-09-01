@@ -1,0 +1,191 @@
+@font: normal 11px sans-serif;
+
+@shadowColor: #333;
+@popupBGColor: #ffe;
+
+@popupArrowOffsetFromCorner: 5px;
+@popupArrowHalfSize: 8px;
+@popupShadowSpread: 4px;
+@popupPadding: 3px;
+@popupFakeShadowSize: .5 * @popupShadowSpread;
+@popupArrowPositioningOffset: (2 * @popupArrowHalfSize);
+@popupArrowShadowIndent: round(.75 * @popupShadowSpread);
+@popupArrowShadowColor: lighten(@shadowColor, 50%);
+@block: ~".b-static-popup";
+
+.auto-offsets () {
+    position: absolute;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+}
+
+// this is the container to be hovered
+@{block} {
+    position: relative;
+
+    // this is the container to position the popup to, OPTIONAL
+    &__anchor {
+        position: relative;
+    }
+
+    &__popup {
+        font: @font;
+        text-align: left;
+
+        display: none;
+        min-width: 150px;
+        max-width: 550px;
+        min-height: @popupArrowOffsetFromCorner + 2 * @popupArrowHalfSize;
+        margin: 0;
+        padding: @popupPadding;
+
+        .auto-offsets;
+
+        color: #333;
+        background-color: @popupBGColor;
+        box-shadow: 0 0 @popupShadowSpread @shadowColor;
+
+        z-index: 200;
+
+        @{block}_size_small & {
+            min-width: 150px;
+        }
+
+        @{block}_size_normal & {
+            min-width: 250px;
+        }
+
+        @{block}_size_large & {
+            min-width: 350px;
+        }
+    }
+
+    &:hover &__popup,
+    &_show &__popup {
+        display: block;
+
+        &:empty {
+            display: none;
+        }
+    }
+
+    &__popup:before,
+    &__popup:after {
+        display: block;
+        width: 0;
+        height: 0;
+
+        .auto-offsets;
+
+        border: solid @popupArrowHalfSize transparent;
+        z-index: 99;
+        content: "";
+    }
+
+    &__popup:before {
+        border-width: @popupArrowHalfSize + @popupFakeShadowSize;
+        border-color: transparent;
+    }
+
+    &_hidden:hover &__popup {
+        display: none;
+    }
+
+    &_dir_right {
+        @{block}__popup {
+            top: -@popupArrowOffsetFromCorner;
+            left: 100%;
+
+            margin-left: @popupArrowHalfSize;
+        }
+
+        @{block}__popup:after {
+            top: @popupArrowOffsetFromCorner;
+            // Why +1?
+            // Here and on: without this, FF has a rounding error when we scale a page with Ctrl+Plus,
+            // which results in ugly grey 1-pixel gap between the arrow and the popup container.
+            // After looking for some obvious fixes like adding an extra fractional part, I found
+            // adding 1 to be the only quick solution.
+            left: -@popupArrowPositioningOffset + 1;
+
+            border-right-color: @popupBGColor;
+        }
+
+        @{block}__popup:before {
+            top: @popupArrowOffsetFromCorner - @popupFakeShadowSize;
+            left: -@popupArrowPositioningOffset - 2 * @popupFakeShadowSize;
+
+            border-right-color: @popupArrowShadowColor;
+        }
+    }
+
+    &_dir_left {
+        @{block}__popup {
+            top: -@popupArrowOffsetFromCorner;
+            right: 100%;
+
+            margin-right: @popupArrowHalfSize;
+        }
+
+        @{block}__popup:after {
+            top: @popupArrowOffsetFromCorner;
+            right: -@popupArrowPositioningOffset + 1;
+
+            border-left-color: @popupBGColor;
+        }
+
+        @{block}__popup:before {
+            top: @popupArrowOffsetFromCorner - @popupFakeShadowSize;
+            right: -@popupArrowPositioningOffset - 2 * @popupFakeShadowSize;
+
+            border-left-color: @popupArrowShadowColor;
+        }
+    }
+
+    &_dir_bottom {
+        @{block}__popup {
+            top: 100%;
+
+            margin-top: @popupArrowHalfSize;
+        }
+
+        @{block}__popup:after {
+            top: -@popupArrowPositioningOffset + 1;
+            left: @popupArrowOffsetFromCorner;
+
+            border-bottom-color: @popupBGColor;
+        }
+
+        @{block}__popup:before {
+            top: -@popupArrowPositioningOffset - 2 * @popupFakeShadowSize;
+            left: @popupArrowOffsetFromCorner - @popupFakeShadowSize;
+
+            border-bottom-color: @popupArrowShadowColor;
+        }
+    }
+
+    &_dir_top {
+        @{block}__popup {
+            bottom: 100%;
+
+            margin-bottom: @popupArrowHalfSize;
+        }
+
+        @{block}__popup:after {
+            bottom: -@popupArrowPositioningOffset + 1;
+            left: @popupArrowOffsetFromCorner;
+
+            border-top-color: @popupBGColor;
+        }
+
+        @{block}__popup:before {
+            bottom: -@popupArrowPositioningOffset - 2 * @popupFakeShadowSize;
+            left: @popupArrowOffsetFromCorner - @popupFakeShadowSize;
+
+            border-top-color: @popupArrowShadowColor;
+        }
+    }
+
+}
