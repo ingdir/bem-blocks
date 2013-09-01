@@ -38,12 +38,13 @@ your popup is attached to.
   * `size` modifier specifies minimum width of the popup; possible values are `small`, `normal`, `large`;
   * boolean `show` modifier; use it to "freeze" the popup (make it permanently visible regardless of the hover state).
 
-
-==== Extra Notes
-By default, styles come as both `.less` and `.css` files. The `.css` file contains "reasonable defaults"; modify some
-values in `.less` (see variables inside) and recompile to see what's possible. Nonetheless, `.less` file was
-never tested to endure hardcore configuration changes; if you can make it perfect, contributions are appreciated.
-
 ==== Browser Compatibility
 Firefox and Chrome and IE10 are okay.
+
 You're welcome to make it work with IE 5 and Netscape 4, too, as fortune always favors the brave.
+
+==== Extra Notes
+By default, styles come as both `.less` and `.css`. The `.css` file contains "reasonable defaults"; modify some
+values in `.less` (see variables inside) and recompile to see what's possible. Nonetheless, `.less` file was
+never tested to endure hardcore configuration changes; if you can make it perfect, contributions are welcome.
+
