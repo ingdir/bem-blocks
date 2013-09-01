@@ -3,6 +3,10 @@
 ###.b-static-popup
 A CSS-only BEM block that implements static hover-based popups, controlled via modifiers.
 
+#### Live Demo
+Play with this block [here](http://htmlpreview.github.io/?https://github.com/ingdir/bem-blocks/blob/master/static-popup/b-static-popup.html).
+
+#### HTML Markup
 HTML structure, simplest case:
 ```html
 <div class="b-static-popup b-static-popup_dir_right">
