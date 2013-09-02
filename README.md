@@ -47,8 +47,12 @@ Firefox and Chrome and IE10 are okay.
 
 You're welcome to make it work with IE 5 and Netscape 4, too, as fortune always favors the brave.
 
-#### Extra Notes
+###.b-flyout
+
+#### Live Demo
+Play with this block [here](http://htmlpreview.github.io/?https://github.com/ingdir/bem-blocks/blob/master/flyout/b-flyout.html).
+
+### Style customization
 By default, styles come as both `.less` and `.css`. The `.css` file contains "reasonable defaults"; modify some
 values in `.less` (see variables inside) and recompile to see what's possible. Nonetheless, `.less` file was
 never tested to endure hardcore configuration changes; if you can make it perfect, contributions are welcome.
-
