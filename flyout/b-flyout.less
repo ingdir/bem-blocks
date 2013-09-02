@@ -1,0 +1,125 @@
+@flyoutSideIndent: 10px;
+@flyoutTitleIndentRight: 35px;
+@flyoutTitleHeight: 50px;
+@block: ~".b-flyout";
+
+@{block} {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    
+    width: 100%;  // without this, webkit gets confused
+    height: 100%;
+    padding: 0;
+    margin: 0;
+
+    border-collapse: collapse;
+    table-layout: fixed;  // this is important to provide div-like behavior
+
+    background-color: rgba(255, 255, 255, .85);
+    z-index: 9999;  // adjust accordingly
+
+    &_hidden {
+        display: none;
+    }
+
+    &__td {
+        padding: 0;
+
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    &__container {
+        position: relative;
+
+        display: inline-block;
+        min-width: 300px;
+        max-width: 75%;
+        margin-top: 8px;  // approximately size of the shadow blur
+        margin-bottom: 100px;  // indentation to shift the block to top somehow
+
+        background-color: #fff;
+        box-shadow: 0 0 5px #666;
+    }
+
+    &__title {
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        width: -moz-calc(100% ~"-" @flyoutTitleIndentRight ~"-" @flyoutSideIndent);
+        width: -webkit-calc(100% ~"-" @flyoutTitleIndentRight ~"-" @flyoutSideIndent);
+        width: calc(100% ~"-" @flyoutTitleIndentRight ~"-" @flyoutSideIndent);
+        height: @flyoutTitleHeight;
+        padding-left: @flyoutSideIndent;
+        line-height: @flyoutTitleHeight;
+
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+
+        color: #621;
+    }
+
+    &__content {
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 100%;
+        height: -moz-calc(100% ~"-" @flyoutTitleHeight);
+        height: -webkit-calc(100% ~"-" @flyoutTitleHeight);
+        height: calc(100% ~"-" @flyoutTitleHeight);
+        min-height: 200px;
+        max-height: 490px;
+
+        padding: 0 (@flyoutSideIndent + 12px) @flyoutSideIndent @flyoutSideIndent;  // padding-right is for scrollbar width, important!
+
+        text-align: left;
+        overflow: auto;
+    }
+
+    &__close {
+        font: normal 20px sans-serif;
+
+        position: absolute;
+        top: 5px;
+        right: 5px;
+
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        border-radius: 5px;
+
+        text-align: center;
+        line-height: 32px;
+
+        color: #000;
+        background-color: #fff;
+
+        cursor: pointer;
+
+        &:hover {
+            color: #621;
+            background-color: #eee;
+        }
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    @{block}__container {
+        max-width: 1200px;
+    }
+}
+
+@media screen and (min-height: 650px) {
+    @{block}__content {
+        max-height: 590px;
+    }
+}
+
+@media screen and (min-height: 800px) {
+    @{block}__content {
+        max-height: 690px;
+    }
+}
+

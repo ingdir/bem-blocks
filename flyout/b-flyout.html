@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $('.b-toggle').on('click', function() {
+                $('.b-flyout').removeClass('b-flyout_hidden');
+            });
+
+            $('.b-flyout__close').on('click', function() {
+                $(this).closest('.b-flyout').addClass('b-flyout_hidden');
+            });
+
+            $('.b-resizer__btn').on('click', function() {
+                var $btn = $(this),
+                    dir = $btn.hasClass('b-resizer__btn_dir_horiz') ? 'height' : 'width',
+                    type = $btn.hasClass('b-resizer__btn_type_plus') ?
+                        function(s) { return s + 80 } :
+                        function(s) { return Math.max(s - 80, 0) },
+                    $container = $btn.closest('.b-resizer');
+
+                $container[dir](type($container[dir]()));
+            });
+        });
+    </script>
+    <link rel="stylesheet" type="text/css" href="b-flyout.css" />
+    <style>
+        .b-page {
+            font-family: sans-serif;
+
+            background-color:#556;
+            background-image: linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+            linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+            linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+            linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
+            linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a),
+            linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a);
+            background-size:80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+        }
+
+        .b-toggle {
+            font-size: 20px;
+
+            position: absolute;
+            top: 40%;
+            left: 50%;
+
+            width: 160px;
+            margin-left: -80px;
+            text-align: center;
+        }
+
+        .b-resizer {
+            width: 400px;
+            height: 200px;
+        }
+
+        .b-resizer__tbl {
+            border-collapse: collapse;
+
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+        }
+
+        .b-resizer__cell {
+            width: 33.333333%;
+            height: 33.33333%;
+
+            border: solid 1px #ccc;
+            text-align: center;
+        }
+
+        .b-resizer__btn {
+            text-align: center;
+            padding: 10px 20px;
+        }
+
+        .b-resizer__btn_type_plus:after {
+            font-size: 20px;
+
+            display: inline;
+            content: "+";
+        }
+
+        .b-resizer__btn_type_minus:after {
+            display: inline;
+            content: "−";
+        }
+    </style>
+</head>
+<body class="b-page">
+
+<button class="b-toggle">Show flyout!</button>
+
+<table class="b-flyout b-flyout_hidden">
+    <tr>
+        <td class="b-flyout__td">
+            <div class="b-flyout__container">
+                <div class="b-flyout__title">
+                    Header text (example)
+                </div>
+                <div class="b-flyout__close">&times;</div>
+                <div class="b-flyout__content">
+                    Content example (click "+" and "−" buttons to resize contents).<br/>
+                    Resize the browser window, too, to see the flyout behavior.
+                    <div class="b-resizer">
+                        <table class="b-resizer__tbl">
+                            <tr>
+                                <td class="b-resizer__cell"></td>
+                                <td class="b-resizer__cell">
+                                    <button class="b-resizer__btn b-resizer__btn_type_plus b-resizer__btn_dir_horiz"></button>
+                                </td>
+                                <td class="b-resizer__cell"></td>
+                            </tr>
+                            <tr>
+                                <td class="b-resizer__cell">
+                                    <button class="b-resizer__btn b-resizer__btn_type_minus b-resizer__btn_dir_vert"></button>
+                                </td>
+                                <td class="b-resizer__cell"></td>
+                                <td class="b-resizer__cell">
+                                    <button class="b-resizer__btn b-resizer__btn_type_plus b-resizer__btn_dir_vert"></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="b-resizer__cell"></td>
+                                <td class="b-resizer__cell">
+                                    <button class="b-resizer__btn b-resizer__btn_type_minus b-resizer__btn_dir_horiz"></button>
+                                </td>
+                                <td class="b-resizer__cell"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
