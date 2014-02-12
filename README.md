@@ -42,36 +42,36 @@ your popup is attached to.
   * `size` modifier specifies minimum width of the popup; possible values are `small`, `normal`, `large`;
   * boolean `show` modifier; use it to "freeze" the popup (make it permanently visible regardless of the hover state).
 
-###.b-flyout
+###.b-modal
 
 #### Live Demo
-Play with this block [here](http://htmlpreview.github.io/?https://github.com/ingdir/bem-blocks/blob/master/flyout/b-flyout.html).
+Play with this block [here](http://htmlpreview.github.io/?https://github.com/ingdir/bem-blocks/blob/master/modal/b-modal.html).
 
 #### HTML
 ```html
-<table class="dm-flyout">
+<table class="dm-modal">
     <tr>
-        <td class="dm-flyout__td">
-            <div class="dm-flyout__container">
-                <div class="dm-flyout__title"></div>
-                <div class="dm-flyout__close">&times;</div>
-                <div class="dm-flyout__content"></div>
+        <td class="dm-modal__td">
+            <div class="dm-modal__container">
+                <div class="dm-modal__title"></div>
+                <div class="dm-modal__close">&times;</div>
+                <div class="dm-modal__content"></div>
             </div>
         </td>
     </tr>
 </table>
 ```
 
-Note: because of the way HTML works with z-indices, make sure the flyout markup stays as close to the end of your document
+Note: because of the way HTML works with z-indices, make sure the modal markup stays as close to the end of your document
 as possible; preferrably, it should be the last DOM element inside the `BODY` container.
 
 #### Modifiers
 
-A boolean modifier, `hidden`, makes the flyout invisible by default.
-Remove it to make the flyout appear on a page.
+A boolean modifier, `hidden`, makes the modal invisible by default.
+Remove it to make the modal appear on a page.
 
 ```html
-<table class="dm-flyout dm-flyout_hidden"><!-- cannot see you, baby! -->
+<table class="dm-modal dm-modal_hidden"><!-- cannot see you, baby! -->
    ...
 </table>
 ```

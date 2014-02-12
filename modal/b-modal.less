@@ -1,7 +1,7 @@
-@flyoutSideIndent: 10px;
-@flyoutTitleIndentRight: 35px;
-@flyoutTitleHeight: 50px;
-@block: ~".b-flyout";
+@modalSideIndent: 10px;
+@modalTitleIndentRight: 35px;
+@modalTitleHeight: 50px;
+@block: ~".b-modal";
 
 @{block} {
     position: fixed;
@@ -9,7 +9,7 @@
     right: 0;
     top: 0;
     bottom: 0;
-    
+
     display: table;
     width: 100%;  // without this, webkit gets confused
     height: 100%;
@@ -50,12 +50,12 @@
     &__title {
         -moz-box-sizing: border-box;
         box-sizing: border-box;
-        width: -moz-calc(100% ~"-" @flyoutTitleIndentRight ~"-" @flyoutSideIndent);
-        width: -webkit-calc(100% ~"-" @flyoutTitleIndentRight ~"-" @flyoutSideIndent);
-        width: calc(100% ~"-" @flyoutTitleIndentRight ~"-" @flyoutSideIndent);
-        height: @flyoutTitleHeight;
-        padding-left: @flyoutSideIndent;
-        line-height: @flyoutTitleHeight;
+        width: -moz-calc(100% ~"-" @modalTitleIndentRight ~"-" @modalSideIndent);
+        width: -webkit-calc(100% ~"-" @modalTitleIndentRight ~"-" @modalSideIndent);
+        width: calc(100% ~"-" @modalTitleIndentRight ~"-" @modalSideIndent);
+        height: @modalTitleHeight;
+        padding-left: @modalSideIndent;
+        line-height: @modalTitleHeight;
 
         text-align: left;
         white-space: nowrap;
@@ -68,13 +68,13 @@
         -moz-box-sizing: border-box;
         box-sizing: border-box;
         width: 100%;
-        height: -moz-calc(100% ~"-" @flyoutTitleHeight);
-        height: -webkit-calc(100% ~"-" @flyoutTitleHeight);
-        height: calc(100% ~"-" @flyoutTitleHeight);
+        height: -moz-calc(100% ~"-" @modalTitleHeight);
+        height: -webkit-calc(100% ~"-" @modalTitleHeight);
+        height: calc(100% ~"-" @modalTitleHeight);
         min-height: 200px;
         max-height: 490px;
 
-        padding: 0 (@flyoutSideIndent + 12px) @flyoutSideIndent @flyoutSideIndent;  // padding-right is for scrollbar width, important!
+        padding: 0 (@modalSideIndent + 12px) @modalSideIndent @modalSideIndent;  // padding-right is for scrollbar width, important!
 
         text-align: left;
         overflow: auto;

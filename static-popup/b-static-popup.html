@@ -22,6 +22,8 @@
 
         addModTrigger('dir');
         addModTrigger('size');
+        addModTrigger('align');
+        addModTrigger('theme');
         $('.b-controls__html').on('input', function() {
             $('.b-static-popup__popup').html(
                 $('<div/>').html( $('.b-controls__html').val() )
@@ -108,10 +110,17 @@
         <option value="left">left</option>
         <option value="top">top</option>
         <option value="bottom">bottom</option>
-    </select> or <strong>size</strong> modifier: <select class="b-controls__size">
+    </select>, <strong>size</strong> modifier: <select class="b-controls__size">
+    <option value="compact">compact</option>
     <option value="small">small</option>
     <option value="normal">normal</option>
     <option value="large">large</option>
+</select>, <strong>align</strong> modifier: <select class="b-controls__align">
+    <option value="left">left</option>
+    <option value="center">center</option>
+</select> or <strong>theme</strong> modifier: <select class="b-controls__theme">
+    <option value="dark">dark</option>
+    <option value="light">light</option>
 </select><br/>
 Modify inner HTML for popups (applied live):<br/>
 <textarea class="b-controls__html">
@@ -121,12 +130,12 @@ technologies) in an extra-semantic way.
 </textarea>
 </div>
 <div class="b-examples">
-    <div class="b-container b-static-popup b-static-popup_dir_right">
-        hover me!
-        <div class="b-static-popup__popup"></div>
+    <div class="b-container b-static-popup b-static-popup_dir_right"
+        ><div class="b-static-popup__popup"></div>
         <div class="b-container__toggle">
             <label><input type="checkbox" />&nbsp;Freeze hovered state</label>
         </div>
+        hover me!
     </div>
         
     <div class="b-container b-static-popup b-static-popup_dir_right">

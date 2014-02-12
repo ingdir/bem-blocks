@@ -1,16 +1,12 @@
-@font: normal 11px sans-serif;
-
-@shadowColor: #333;
-@popupBGColor: #ffe;
-
 @popupArrowOffsetFromCorner: 5px;
 @popupArrowHalfSize: 8px;
 @popupShadowSpread: 4px;
-@popupPadding: 3px;
 @popupFakeShadowSize: .5 * @popupShadowSpread;
 @popupArrowPositioningOffset: (2 * @popupArrowHalfSize);
 @popupArrowShadowIndent: round(.75 * @popupShadowSpread);
-@popupArrowShadowColor: lighten(@shadowColor, 50%);
+@popupArrowShadowColor: darken(#dfdfdf, 15%);
+@popupTextColor: #fff;
+@popupBGColor: #333;
 @block: ~".b-static-popup";
 
 .auto-offsets () {
@@ -31,44 +27,33 @@
     }
 
     &__popup {
-        font: @font;
+        font: normal 11px sans-serif;
         text-align: left;
 
         display: none;
         min-width: 150px;
         max-width: 550px;
-        min-height: @popupArrowOffsetFromCorner + 2 * @popupArrowHalfSize;
         margin: 0;
-        padding: @popupPadding;
+        padding: 3px 5px;
 
         .auto-offsets;
 
-        color: #333;
+        color: @popupTextColor;
         background-color: @popupBGColor;
-        box-shadow: 0 0 @popupShadowSpread @shadowColor;
+        box-shadow: 0 0 @popupShadowSpread #666;
 
         z-index: 200;
 
-        @{block}_size_small & {
-            min-width: 150px;
-        }
+        cursor: default;
 
-        @{block}_size_normal & {
-            min-width: 250px;
-        }
-
-        @{block}_size_large & {
-            min-width: 350px;
+        &_tight {
+            padding: 0;
         }
     }
 
     &:hover &__popup,
     &_show &__popup {
         display: block;
-
-        &:empty {
-            display: none;
-        }
     }
 
     &__popup:before,
@@ -146,8 +131,6 @@
 
     &_dir_bottom {
         @{block}__popup {
-            top: 100%;
-
             margin-top: @popupArrowHalfSize;
         }
 
@@ -185,6 +168,127 @@
             left: @popupArrowOffsetFromCorner - @popupFakeShadowSize;
 
             border-top-color: @popupArrowShadowColor;
+        }
+    }
+
+    &_dir_top@{block}_align_center,
+    &_dir_bottom@{block}_align_center {
+
+        @{block}__popup {
+            left: 50%;
+        }
+
+        @{block}__popup:after {
+            left: 50%;
+            margin-left: -1 * @popupArrowHalfSize;
+        }
+
+        @{block}__popup:before {
+            left: 50%;
+            margin-left: -1 * (@popupArrowHalfSize + @popupFakeShadowSize);
+        }
+    }
+
+    &_dir_left@{block}_align_center,
+    &_dir_right@{block}_align_center {
+        @{block}__popup {
+            top: 50%;
+        }
+
+        @{block}__popup:after {
+            top: 50%;
+            margin-top: -1 * @popupArrowHalfSize;
+        }
+
+        @{block}__popup:before {
+            top: 50%;
+            margin-top: -1 * (@popupArrowHalfSize + @popupFakeShadowSize);
+        }
+    }
+
+    &_theme_light {
+        @{block}__popup {
+            color: #000;
+            background-color: #fff;
+        }
+
+        &@{block}_dir_left @{block}__popup:after {
+            border-left-color: #fff;
+        }
+
+        &@{block}_dir_right @{block}__popup:after {
+            border-right-color: #fff;
+        }
+
+        &@{block}_dir_top @{block}__popup:after {
+            border-top-color: #fff;
+        }
+
+        &@{block}_dir_bottom @{block}__popup:after {
+            border-bottom-color: #fff;
+        }
+    }
+
+    &_size_compact {
+        @{block}__popup {
+            min-width: 0;
+            white-space: nowrap;
+        }
+
+        &@{block}_dir_top@{block}_align_center,
+        &@{block}_dir_bottom@{block}_align_center {
+            @{block}__popup {
+                left: 0;
+            }
+        }
+    }
+
+    &_size_small {
+        @{block}__popup {
+            min-width: 150px;
+        }
+
+        &@{block}_dir_top@{block}_align_center,
+        &@{block}_dir_bottom@{block}_align_center {
+            @{block}__popup {
+                margin-left: -75px;
+            }
+        }
+    }
+
+    &_size_normal {
+        @{block}__popup {
+            min-width: 250px;
+        }
+
+        &@{block}_dir_top@{block}_align_center,
+        &@{block}_dir_bottom@{block}_align_center {
+            @{block}__popup {
+                margin-left: -125px;
+            }
+        }
+    }
+
+    &_size_large {
+        @{block}__popup {
+            min-width: 350px;
+            word-wrap: break-word;
+        }
+
+        &@{block}_dir_top@{block}_align_center,
+        &@{block}_dir_bottom@{block}_align_center {
+            @{block}__popup {
+                margin-left: -175px;
+            }
+        }
+    }
+
+    // unlike dir_top and dir_bottom modifiers, dir_left and dir_right
+    // do not affect the way offsets are calculated for align_center
+    &@{block}_dir_left@{block}_align_center,
+    &@{block}_dir_right@{block}_align_center {
+        @{block}__popup {
+            margin-top: -50%;
         }
     }
 
